@@ -1,0 +1,14 @@
+.enemy{
+  background: url('blackship.png');
+}
+#player{
+ 
+  background: url('orangeship.png');
+ 
+}
+.playerMissiles{
+  background: url('bullet.jpg');
+}
+.number{
+  color:green;
+}
