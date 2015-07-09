@@ -1,14 +1,55 @@
 .enemy{
   background: url('blackship.png');
 }
+.enemy2{
+background: url('enemy2.jpg');
+}
 #player{
  
   background: url('orangeship.png');
  
 }
 .playerMissiles{
-  background: url('bullet.jpg');
+  background: url('bullet.png');
 }
-.number{
-  color:green;
+
+#rectangle{
+    width:250;
+    height:25px;
+    background:green;
+	position:absolute;
+	z-index:100;
+	
+}
+
+.boss{
+background: url('boss.png')}
+
+#rectangle2{
+width:250;
+height:25px;
+background:red;
+position:absolute;
+z-index:99;
+}
+.cargoship{
+background: url('cargoship.png');
+}
+#rectangle3{
+width:250;
+height:50px;
+background:blue;
+position:absolute;
+z-index:98;
+
+#rectangle4{
+width:250;
+height:50px;
+background:red;
+position:absolute;
+z-index:97;
+}
+
+#score {
+  z-index: 101;
 }

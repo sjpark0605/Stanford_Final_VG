@@ -19,18 +19,18 @@ var cargoshipHeight = 88;
 var cargoshipWidth = 50;
 var bossHeight = 512;
 var bossWidth = 512;
-var bossHealth = 1250;
-var bossCount = 10;
+var bossHealth = 200;
+var bossCount = 0;
 var notSpawned = true;
 var vel = 10;  
-var bossKilled = 0;
 
+  
 
+setInterval(function () {playerStamina -=3}, 1000);
 $("#startbutton").click(function(){
   $.playground().startGame(function(){
 	  $("#welcomeScreen").fadeTo(1000,0,function(){$(this).remove();});
 	});
-  setInterval(function () {playerStamina -=3}, 1000);
   document.getElementById('score').style.display = 'block';
 });
 
@@ -38,12 +38,7 @@ function Enemy(node, value){
   this.speed = 15;
   this.node = node;
   this.update = function(){
-if (shipHealth <= 0){
-            $("#playground").append('<div style="position: absolute; top: 300px; width: 1440; color: white; font-family: verdana, sans-serif;"><center><h1>Game Over</h1><br><a style="cursor: pointer;" id="restartbutton">Please refresh the page!</a></center></div>');
-						$("#restartbutton").click(function(){$.playground().startGame(function(){$("#welcomeScreen").fadeTo(1000,0,function(){$(this).remove();})
-});
-            }
-            )}
+
     this.node.x(-this.speed, true);
     this.Health = 2;
     document.getElementById('rectangle').style.width = shipHealth.toString();
@@ -54,32 +49,19 @@ if (shipHealth <= 0){
  }
    
  
- if (enemyCount >= bossCount && notSpawned) {
-
-
-        notSpawned = false;
-        var bossValue = Math.ceil(Math.random()*21) - 11;
+ if (enemyCount >= 3 && notSpawned) {
+notSpawned = false;
+   {
+       var bossValue = Math.ceil(Math.random()*21) - 11;
        var name4 = "boss_"+(new Date).getTime();
        $("#enemies").addSprite(name4, {animation: '', posx: PLAYGROUND_WIDTH, posy: Math.random()*PLAYGROUND_HEIGHT*0.9,width: bossWidth, height: bossHeight});
        var bossElement = $("#"+name4);
        bossElement.addClass("boss");
        bossElement[0].enemy = new Boss(bossElement, bossValue);
-  
-  }
-  
-  
-if (bossHealth <= 0 && notSpawned == false) {
-    notSpawned = true;
-    bossKilled +=1;
-    bossCount += bossCount;
-    score+=100 + (25*bossKilled);
-    enemySpawnRate -= 50;
-    enemy2SpawnRate -= 50;
-    $('.boss').remove();
-    bossHealth = 1250 + (bossKilled * 250);  
-    shipHealth = 250;
+   }; 
   }
 };
+
  
 
 function Enemy2(node, value) {
@@ -124,13 +106,12 @@ if ($('.boss').y() < $('#player').y()) {
   };
 };
 
-function Player() {
-  
-};
 
 var playerHeight = 86;
 var playerWidth = 151;
+function Player(){
 
+  };
 
 
 var missileSpeed = 20;
@@ -294,10 +275,11 @@ $.playground().registerCallback(function(){
       $(this).x(missileSpeed, true);
       var collided = $(this).collision(".boss,."+$.gQ.groupCssClass);
       if (collided.length > 0){
-        bossHealth-=25;
+        bossHealth-=250;
         $(this).remove();
         score = score + 10;
-          shipHealth = shipHealth + 1;
+          enemyCount++;
+          shipHealth = shipHealth + 3;
       };
     };
   });
@@ -365,9 +347,5 @@ $(document).keydown(function(e){
       shipHealth--;
   } 
 });
-
-
-
-
 
 
